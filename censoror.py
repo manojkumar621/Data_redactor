@@ -3,6 +3,8 @@ import glob
 import os, sys
 from assignment1.main import mask_content
 from assignment1.name_detector import detect_names
+import warnings
+warnings.filterwarnings("ignore")
 
 def write_stats(stats, stats_path):
     '''This function takes the stats variable and write all its contents into given stats_path'''
@@ -21,17 +23,16 @@ def write_stats(stats, stats_path):
 def censor_docs(glob_pattern, **kwargs):
     '''This function processes all files that extend matching the glob , returns stats and .censored files'''
     files_list = glob.glob(glob_pattern)
-    print(files_list)
     for file_name in files_list:
         with open(file_name, 'r') as file:
             file_content = file.read()
             stats = dict(file_name = file_name)
             masked_file_content, stats = mask_content(file_content, stats)
-        censored_file_name = file_name + 'censored' if file_name.endswith('.') else file_name + '.censored'
+        # censored_file_name = file_name + 'censored' if file_name.endswith('.') else file_name + '.censored'
+        censored_file_name = file_name + '.censored'
         output_path = kwargs.get('output_dir', '')
         output_path = output_path + '/' if not output_path.endswith('/') else output_path
         censored_file_name = output_path + censored_file_name
-        print('OUTPUT PATH', ' ', output_path)
         if not os.path.exists(output_path):
             os.makedirs(os.path.dirname(output_path), exist_ok=True)
         with open(censored_file_name, 'w') as file:

@@ -22,5 +22,5 @@ def test_detect_phone(sample_test_string):
     assert phone_numbers is not None
 
 def test_censor_phones(sample_test_string):
-    final_string = censor_phone(sample_test_string)
+    final_string, stats = censor_phone(sample_test_string, {})
     assert final_string is not sample_test_string

@@ -21,5 +21,5 @@ def test_detect_address(sample_test_string):
     assert len(pyap_addresses)>0 or len(spacy_addresses)>0
 
 def test_censor_address(sample_test_string):
-    final_string = censor_address(sample_test_string)
+    final_string, stats = censor_address(sample_test_string, {})
     assert final_string is not sample_test_string

@@ -1,5 +1,6 @@
 import spacy
-
+import warnings
+warnings.filterwarnings("ignore")
 def detect_names(text):
     '''This function detects name entities from a string'''
     # Load the English language model from spaCy

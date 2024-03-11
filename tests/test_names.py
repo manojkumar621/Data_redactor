@@ -22,7 +22,7 @@ def test_detect_names(sample_test_string):
     assert names is not None
 
 def test_censor_names(sample_test_string):
-    final_string = censor_names(sample_test_string)
+    final_string, stats = censor_names(sample_test_string, {})
     assert final_string is not sample_test_string
 
 

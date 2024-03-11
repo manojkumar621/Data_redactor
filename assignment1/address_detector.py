@@ -1,5 +1,9 @@
 import pyap
 import spacy
+import warnings
+
+
+warnings.filterwarnings("ignore")
 def detect_address(text):
     '''This function detects address entities from a text'''
     pyap_addresses = pyap.parse(text, country='US')
@@ -15,7 +19,7 @@ def censor_address(text, stats):
     pyap_addresses, spacy_loc_entities = detect_address(text)
 
     for address in pyap_addresses:
-        text = text.replace(address, 'X' * len(address))
+        text = text.replace(str(address), 'X' * len(str(address)))
     for tag in spacy_loc_entities:
         text = text.replace(tag, 'X' * len(tag))
     stats['addresses masked'] = len(pyap_addresses) + len(spacy_loc_entities)
